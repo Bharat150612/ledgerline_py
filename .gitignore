@@ -22,7 +22,7 @@ env/
 !.env.example
 
 # ── ML Models (large binary files) ───────────────────────────────────────────
-backend/models.pkl
+# backend/models.pkl  ← tracked intentionally for Render deployment
 
 # ── Node / Frontend ───────────────────────────────────────────────────────────
 node_modules/
