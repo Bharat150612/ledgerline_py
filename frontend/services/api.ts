@@ -49,7 +49,7 @@ export const api = {
       body: JSON.stringify({ employees }),
     }).then(json),
   summary: (id: string): Promise<{ summary: string; isFallback?: boolean }> =>
-    fetch(`${BASE_URL}/api/employees/${id}/summary`, { method: 'POST' }).then(json),
+    fetch(`${BASE_URL}/api/narratives/${id}/summary`, { method: 'POST' }).then(json),
   predictReason: (id: string): Promise<{ explanation: string; isFallback?: boolean }> =>
-    fetch(`${BASE_URL}/api/employees/${id}/predict-reason`, { method: 'POST' }).then(json),
+    fetch(`${BASE_URL}/api/narratives/${id}/predict-reason`, { method: 'POST' }).then(json),
 };

@@ -29,7 +29,7 @@ CORS(app, origins=allowed_origin, methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTI
 # ── Routes ────────────────────────────────────────────────────────────────────
 app.register_blueprint(system_bp,     url_prefix='/api')
 app.register_blueprint(employees_bp,  url_prefix='/api/employees')
-app.register_blueprint(narratives_bp, url_prefix='/api/employees')
+app.register_blueprint(narratives_bp, url_prefix='/api/narratives')
 
 # ── Frontend static serving (dev / single-server mode) ───────────────────────
 FRONTEND_DIST = os.path.join(os.path.dirname(__file__), '..', 'frontend', 'dist')
