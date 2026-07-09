@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+/*
+  Design system: "Ledgerline"
+  A case-file / personnel-ledger aesthetic for an HR attrition-risk console.
+  Ink-charcoal ground, kraft-paper accent, index-card structure.
+*/
+:root {
+  /* Polish original Charcoal & Kraft theme to look extremely fresh, premium, and clean */
+  --color-ink: #0f1115;        /* Deep rich charcoal canvas */
+  --color-ink-homepage: #000000; /* Pure black background for landing splash */
+  --color-ink-raised: #171a21; /* Sleek carbon card containers */
+  --color-ink-sunken: #0a0c0e; /* Deep dark input slots */
+  --color-hairline: #262b35;   /* Refined borders */
+
+  --color-bone: #f3efe9;       /* Fresh warm ivory text */
+  --color-bone-dim: #a0a29e;   /* Soft warm grey label text */
+  --color-bone-faint: #6b6d6c;
+
+  --color-kraft: #dda15e;      /* Premium caramel gold accent */
+  --color-kraft-dim: #bc8a50;  /* Slightly darker caramel gold */
+  --color-kraft-fg: #0f1115;   /* Dark charcoal text for high contrast on gold */
+
+  /* Cohesive Earthy Status Indicators */
+  --color-rust: #c1502e;
+  --color-amber: #d69a3c;
+  --color-teal: #4c8b78;
+  --color-fog: #6f8ca8;
+
+  --ledger-rule-color: rgba(243, 239, 233, 0.02);
+
+  --color-risk-critical-fg: #e8886a;
+  --color-risk-critical-bg: rgba(232, 136, 106, 0.08);
+  --color-risk-critical-ring: rgba(232, 136, 106, 0.25);
+
+  --color-risk-high-fg: #e3ae5f;
+  --color-risk-high-bg: rgba(227, 174, 95, 0.08);
+  --color-risk-high-ring: rgba(227, 174, 95, 0.25);
+
+  --color-risk-medium-fg: #8fb0cc;
+  --color-risk-medium-bg: rgba(143, 176, 204, 0.08);
+  --color-risk-medium-ring: rgba(143, 176, 204, 0.25);
+
+  --color-risk-low-fg: #7fbba4;
+  --color-risk-low-bg: rgba(127, 187, 164, 0.1);
+  --color-risk-low-ring: rgba(127, 187, 164, 0.25);
+}
+
+html.light {
+  /* Warm parchment light theme */
+  --color-ink: #f7f4ef;        /* Light warm parchment canvas */
+  --color-ink-homepage: #f7f4ef; /* Match light parchment background */
+  --color-ink-raised: #ffffff; /* Sleek pure white card containers */
+  --color-ink-sunken: #ede9e1; /* Deep parchment input slots */
+  --color-hairline: #e3dcd0;   /* Borders: warm subtle sand-grey */
+
+  --color-bone: #171a21;       /* Dark charcoal text for high contrast on light canvas */
+  --color-bone-dim: #5c6270;   /* Muted grey for sub-labels and info */
+  --color-bone-faint: #8a91a0; /* Faint grey for borders/captions */
+
+  --color-kraft: #b07028;      /* Caramel gold, darkened slightly for AA contrast on light bg */
+  --color-kraft-dim: #8b5318;  /* Even darker accent */
+  --color-kraft-fg: #ffffff;   /* Text color on kraft background elements (white) */
+
+  --ledger-rule-color: rgba(23, 26, 33, 0.04); /* rule colors in light mode */
+
+  /* Cohesive Earthy Status Indicators (Darkened for Light BG readability) */
+  --color-rust: #ab3615;
+  --color-amber: #b27415;
+  --color-teal: #2e6353;
+  --color-fog: #446482;
+
+  --color-risk-critical-fg: #b93b1b;
+  --color-risk-critical-bg: rgba(185, 59, 27, 0.08);
+  --color-risk-critical-ring: rgba(185, 59, 27, 0.25);
+
+  --color-risk-high-fg: #9e6a17;
+  --color-risk-high-bg: rgba(158, 106, 23, 0.08);
+  --color-risk-high-ring: rgba(158, 106, 23, 0.25);
+
+  --color-risk-medium-fg: #2d5c84;
+  --color-risk-medium-bg: rgba(45, 92, 132, 0.08);
+  --color-risk-medium-ring: rgba(45, 92, 132, 0.25);
+
+  --color-risk-low-fg: #20664e;
+  --color-risk-low-bg: rgba(32, 102, 78, 0.08);
+  --color-risk-low-ring: rgba(32, 102, 78, 0.25);
+}
+
+
+@theme {
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-ink: var(--color-ink);
+  --color-ink-raised: var(--color-ink-raised);
+  --color-ink-sunken: var(--color-ink-sunken);
+  --color-hairline: var(--color-hairline);
+
+  --color-bone: var(--color-bone);
+  --color-bone-dim: var(--color-bone-dim);
+  --color-bone-faint: var(--color-bone-faint);
+
+  --color-kraft: var(--color-kraft);
+  --color-kraft-dim: var(--color-kraft-dim);
+
+  --color-rust: var(--color-rust);
+  --color-amber: var(--color-amber);
+  --color-teal: var(--color-teal);
+  --color-fog: var(--color-fog);
+}
+
+@layer base {
+  html {
+    background-color: var(--color-ink);
+  }
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  /* Smooth theme transitions */
+  header, main, button, input, select, textarea, .tab-card, .border {
+    transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Faint paper-grain + ledger rule texture on the page background */
+.ledger-ground {
+  background-image:
+    linear-gradient(var(--ledger-rule-color) 1px, transparent 1px);
+  background-size: 100% 2rem;
+  background-position: 0 4px;
+}
+
+.ledger-ground::before {
+  content: "";
+}
+
+/* Folder-tab notch used on card headers: the signature structural device */
+.tab-card {
+  position: relative;
+  clip-path: polygon(
+    0 14px, 14px 0,
+    150px 0, 164px 14px,
+    100% 14px,
+    100% 100%,
+    0 100%
+  );
+}
+
+@media (max-width: 640px) {
+  .tab-card {
+    clip-path: polygon(
+      0 12px, 12px 0,
+      96px 0, 108px 12px,
+      100% 12px,
+      100% 100%,
+      0 100%
+    );
+  }
+}
+
+.stamp-rotate {
+  transform: rotate(-4deg);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-kraft-dim);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.35s ease-out;
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white !important; color: black !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
