@@ -103,3 +103,20 @@ def import_emp():
     except Exception as e:
         print(f'Import error: {e}')
         return jsonify({'error': 'Failed to import employees', 'details': str(e)}), 500
+
+
+@bp.route('/rescore-all', methods=['POST'])
+def rescore_all():
+    """Re-run risk analysis on every stored employee using the current model."""
+    try:
+        from store import fetch_employees, persist_employee
+        employees = fetch_employees()
+        updated = 0
+        for emp in employees:
+            emp['analysis'] = analyze_employee_risk(emp)
+            persist_employee(emp)
+            updated += 1
+        return jsonify({'success': True, 'rescored': updated})
+    except Exception as e:
+        print(f'Rescore error: {e}')
+        return jsonify({'error': 'Failed to rescore employees', 'details': str(e)}), 500

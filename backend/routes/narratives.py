@@ -18,7 +18,8 @@ def summary(emp_id):
 
         analysis = emp.get('analysis') or analyze_employee_risk(emp)
         result   = generate_executive_summary(emp, analysis)
-        return jsonify(result)
+        # Frontend expects { summary, isFallback } — rename 'text' → 'summary'
+        return jsonify({'summary': result.get('text', ''), 'isFallback': result.get('isFallback', True)})
     except Exception as e:
         return jsonify({'error': 'Failed to generate summary', 'details': str(e)}), 500
 
@@ -33,6 +34,7 @@ def predict_reason(emp_id):
         analysis   = emp.get('analysis') or analyze_employee_risk(emp)
         prediction = analysis.get('reasonPrediction') or predict_attrition_reason(emp)
         result     = generate_reason_explanation(emp, analysis, prediction)
-        return jsonify(result)
+        # Frontend expects { explanation, isFallback } — rename 'text' → 'explanation'
+        return jsonify({'explanation': result.get('text', ''), 'isFallback': result.get('isFallback', True)})
     except Exception as e:
         return jsonify({'error': 'Failed to generate reason interpretation', 'details': str(e)}), 500

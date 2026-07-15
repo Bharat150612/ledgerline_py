@@ -17,6 +17,8 @@ export function ReasonPredictor({
   onSearch,
   deptFilter,
   onDeptFilter,
+  riskFilter,
+  onRiskFilter,
   selectedEmpId,
   onSelect,
   selectedEmployee,
@@ -31,6 +33,8 @@ export function ReasonPredictor({
   onSearch: (v: string) => void;
   deptFilter: string;
   onDeptFilter: (v: string) => void;
+  riskFilter: string;
+  onRiskFilter: (v: string) => void;
   selectedEmpId: string | null;
   onSelect: (id: string) => void;
   selectedEmployee: Employee | null;
@@ -60,8 +64,8 @@ export function ReasonPredictor({
             onSearch={onSearch}
             deptFilter={deptFilter}
             onDeptFilter={onDeptFilter}
-            riskFilter="All"
-            onRiskFilter={() => {}}
+            riskFilter={riskFilter}
+            onRiskFilter={onRiskFilter}
             selectedEmpId={selectedEmpId}
             onSelect={onSelect}
           />

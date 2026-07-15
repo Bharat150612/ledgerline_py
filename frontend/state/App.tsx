@@ -86,6 +86,7 @@ export default function App() {
   const [explanationError, setExplanationError] = useState('');
   const [reasonSearchQuery, setReasonSearchQuery] = useState('');
   const [reasonDeptFilter, setReasonDeptFilter] = useState('All');
+  const [reasonRiskFilter, setReasonRiskFilter] = useState('All');
 
   const showToast = (msg: string) => {
     setSuccessMsg(msg);
@@ -390,7 +391,8 @@ export default function App() {
     const q = reasonSearchQuery.trim().toLowerCase();
     const matchesSearch = q === '' || emp.name.toLowerCase().includes(q) || emp.id.toLowerCase().includes(q) || emp.employment.jobRole.toLowerCase().includes(q);
     const matchesDept = reasonDeptFilter === 'All' || emp.employment.department === reasonDeptFilter;
-    return matchesSearch && matchesDept;
+    const matchesRisk = reasonRiskFilter === 'All' || emp.analysis?.riskLevel === reasonRiskFilter;
+    return matchesSearch && matchesDept && matchesRisk;
   });
 
   const hasData = employees.length > 0;
@@ -504,6 +506,8 @@ export default function App() {
           onSearch={setReasonSearchQuery}
           deptFilter={reasonDeptFilter}
           onDeptFilter={setReasonDeptFilter}
+          riskFilter={reasonRiskFilter}
+          onRiskFilter={setReasonRiskFilter}
           selectedEmpId={reasonSelectedEmpId}
           onSelect={setReasonSelectedEmpId}
           selectedEmployee={reasonSelectedEmployee}
